@@ -2,6 +2,7 @@
 package visual;
 import DAO.SQL;
 import controle.conectabd;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +33,9 @@ public class login extends javax.swing.JFrame {
             rs = pst.executeQuery();
             
             if(rs.next()){
-                JOptionPane.showMessageDialog(null,"ok!");
+                janelaPrinc frm = new janelaPrinc();
+                frm.setVisible(true);
+                dispose();
             }else{
                 JOptionPane.showMessageDialog(null,"Usuario e senha Inválidos");
             }
@@ -93,6 +96,12 @@ public class login extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 115;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel1.add(txtLogin, gridBagConstraints);
+
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -124,7 +133,6 @@ public class login extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(35, 35, 0, 35);
         jPanel2.add(jPanel1, gridBagConstraints);
-        jPanel1.getAccessibleContext().setAccessibleName("GameVicio");
 
         jLabel3.setText("Build Verson 1.0.0.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -162,6 +170,15 @@ public class login extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_btLogarActionPerformed
 
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER){    
+            try {
+               Logar (txtLogin,txtSenha);
+           } catch (ClassNotFoundException ex) {
+               Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+           }
+    }//GEN-LAST:event_txtSenhaKeyPressed
+    }
     /**
      * @param args the command line arguments
      */
